@@ -12,6 +12,7 @@ function App() {
       <p>game 2</p>
       <p>game 3</p>
       <p>game 4 (coming soon ...)</p>
+      <p>test message</p>
     </h2>
     </div>
   );
