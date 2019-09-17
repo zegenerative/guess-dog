@@ -12,13 +12,10 @@ export default class DogsList extends Component {
   render() {
     const { dogBreeds } = this.props
     return (
-      
       <div className="dogs-list">
         <button><Link to="/">Go to main page</Link></button>
         <h1>Dogs List</h1>
-
         { !dogBreeds && 'Loading...' }
-
         {
           dogBreeds &&
           <ul>{ dogBreeds.map(this.renderDogBreed) }</ul>
