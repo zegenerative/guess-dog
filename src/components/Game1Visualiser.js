@@ -12,6 +12,8 @@ export default class Game1Visualiser extends Component {
   render() {
     return (
       <div>
+        <h1> do not refresh!!!</h1>
+        <p>look! this is a {this.props.breed}</p>
           <img src={this.props.imgUrl} alt='dog'></img>
       </div>
     )

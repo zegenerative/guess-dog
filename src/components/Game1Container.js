@@ -22,21 +22,22 @@ class Game1Container extends Component {
         console.log('I AM DISPATCHING URL AND RANDOMBREED')
         this.props.dispatch({
             type: 'ADD_URL_RANDOMBREED',
-            payload: {url, breed}
+            payload: {
+                url, breed
+            }
         })
     }
 
-  render() {
+    render() {
       console.log(this.props)
-    return <div><h1> do not refresh!!!</h1>
-    <Game1Visualiser imgUrl={this.props.url}/></div>
+    return <Game1Visualiser imgUrl={this.props.url} breed={this.props.breed}/>
   }
 }
 
 const mapStateToProps = (state) => {
     console.log('STATE GAME1', state)
     return {
-        dogsList: state.main,
+        dogsList: state.mainpage,
         url: state.game1.url,
         breed: state.game1.breed
     }
