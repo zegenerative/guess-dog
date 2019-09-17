@@ -1,30 +1,11 @@
 import React, { Component } from 'react'
 import DogsList from './DogsList'
-import request from 'superagent'
 import { connect } from 'react-redux'
 
 class DogsListContainer extends Component {
 
-    setStoreWithDogs = (breeds) => {
-        this.props.dispatch({
-            type: 'INITIALISE_STORE',
-            payload: {
-                dogsList: breeds
-            }
-        })
-    }
-
-    componentDidMount() {
-        request
-            .get('https://dog.ceo/api/breeds/list/all')
-            .then(response => {
-            const breeds = Object.keys(response.body.message)
-            this.setStoreWithDogs(breeds)
-            })
-            .catch(console.error)
-        }
-
   render() {
+    console.log(this.props.dogs)
     return <DogsList dogBreeds={this.props.dogs.dogsList} />
   }
 }

@@ -1,10 +1,8 @@
-const reducer = (state = 0, action = {}) => {
-    switch (action.type) {
-        case 'INITIALISE_STORE':
-            return action.payload
-    default:
-      return state 
-    }
-  }
+import { combineReducers } from 'redux'
+import game1 from './game1'
+import main from './main'
 
-  export default reducer
+export default combineReducers({
+      main,
+      game1
+  })
