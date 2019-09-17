@@ -45,7 +45,7 @@ class Game1Container extends Component {
         console.log("randomDogAnswer2 is ", randomDogAnswer2)
         dogAnswers = dogAnswers.concat(randomDogAnswer, randomDogAnswer2, this.props.breed)*/
         
-        //for(let i=0; i< 2;i++){
+    
         while(dogAnswers.length < 3){
 
             randomAnswer = listOfWrongDogs[Math.floor(Math.random()*listOfWrongDogs.length)]
@@ -53,10 +53,10 @@ class Game1Container extends Component {
             listOfWrongDogs = listOfWrongDogs.filter(dog => dog !== randomAnswer)
 
         }
-        //}
+    
         console.log("dogAnswers length is", dogAnswers.length)
 
-        return dogAnswers
+        return dogAnswers.sort(() => Math.random() - 0.5)
 
     }
     
