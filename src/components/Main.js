@@ -34,8 +34,8 @@ class Main extends Component {
               <Link to="/Game1"><button>Game 1</button></Link>
               <button>Game 2</button>
               <button>Game 3</button>
+              <Link to='/Credits'><footer>credits</footer></Link>
           </div>
-          
       </div>
     )
   }
