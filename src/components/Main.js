@@ -1,30 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import request from 'superagent'
 
-export default class MainPage extends Component {
+class Main extends Component {
 
   render() {
-    componentDidMount() {
-        request
-          .get('https://dog.ceo/api/breeds/list/all')
-          .then(response => {
-            const breeds = Object.keys(response.body.message)
-            setStoreWithDogs()
-          })
-          .catch(console.error)
-      }
-    
-    setStoreWithDogs = (dogslist) => {
-        console.log('I AM RUNNING')
-        this.props.dispatch({
-            type: 'INITIALISE_STORE',
-            payload: {
-                dogslist: 10
-            }
-        })
-    }
-    
     const urlDogImage = "https://s.abcnews.com/images/US/160825_vod_orig_historyofdogs_16x9_992.jpg"
     return (
       <div>
@@ -44,7 +25,7 @@ export default class MainPage extends Component {
 
 const mapStateToProps = (state) => {
     return {
-      dogs: state
+      state
     }
   }
 
