@@ -1,80 +1,52 @@
 import React, { Component } from 'react'
 import Game1Visualiser from './Game1Visualiser'
-import request from 'superagent'
 import { connect } from 'react-redux'
+import { getDogs } from '../actions/getDogs'
+import { getBreedAndUrl } from '../actions/getBreedAndUrl'
 
 class Game1Container extends Component {
-
     componentDidMount() {
-        console.log(this.props)
-        const random = Math.floor((Math.random() * this.props.dogsList.length) - 1)
-        const randomBreed = this.props.dogsList[random]
-        request
-            .get('https://dog.ceo/api/breed/' + randomBreed + '/images/random')
-            .then(response => {
-            const imgUrl = response.body.message
-            this.moveIntoTheStore(imgUrl, randomBreed)
-            })
-            .catch(console.error)
-        }
-    
-    moveIntoTheStore = (url, breed) => {
-        console.log('I AM DISPATCHING URL AND RANDOMBREED')
-        this.props.dispatch({
-            type: 'ADD_URL_RANDOMBREED',
-            payload: {
-                url, breed
-            }
-        })
+        this.props.getDogs()
     }
 
+    startGame = () => {
+        console.log('start game')
+        return this.props.getBreedAndUrl()
+    }
+        
     createRandomAnswers = () => {
-
-        let dogAnswers = [this.props.breed]
-        let randomAnswer = null
-        let listOfWrongDogs = this.props.dogsList.filter(dog => dog !== this.props.breed)
-        /*const listOfAllDogs = this.props.dogsList
-        console.log("listOfAllDogs is", listOfAllDogs)
-        const listOfAllDogsLessCorrect = listOfAllDogs.filter(Dog => Dog !== this.props.breed)
-        console.log("listOfAllDoglessCorrect is", listOfAllDogsLessCorrect, "list of correct answer is:", this.props.breed)
-        const randomDogAnswer = listOfAllDogsLessCorrect[Math.floor(Math.random()*listOfAllDogsLessCorrect.length)]
+        if(this.props.dogsList !== null) {
+            const dogsList = this.props.dogsList
+            let dogAnswers = [this.props.breed]
+            let randomAnswer = null
+            let listOfWrongDogs = dogsList.filter(dog => dog !== this.props.breed)
         
-        const listOfAllDogsLessCorrectPlusOne = listOfAllDogsLessCorrect.filter(Dog => Dog !== randomDogAnswer)
-        console.log("listOfAllDogsLessCorrectPlusone is", listOfAllDogsLessCorrectPlusOne)
-        const randomDogAnswer2 = listOfAllDogsLessCorrectPlusOne[Math.floor(Math.random()*listOfAllDogsLessCorrectPlusOne.length)]
-        console.log("randomDogAnswer2 is ", randomDogAnswer2)
-        dogAnswers = dogAnswers.concat(randomDogAnswer, randomDogAnswer2, this.props.breed)*/
-        
-    
-        while(dogAnswers.length < 3){
-
-            randomAnswer = listOfWrongDogs[Math.floor(Math.random()*listOfWrongDogs.length)]
-            dogAnswers = dogAnswers.concat(randomAnswer)
-            listOfWrongDogs = listOfWrongDogs.filter(dog => dog !== randomAnswer)
-
+            while(dogAnswers.length < 3){
+                randomAnswer = listOfWrongDogs[Math.floor(Math.random()*listOfWrongDogs.length)]
+                dogAnswers = dogAnswers.concat(randomAnswer)
+                listOfWrongDogs = listOfWrongDogs.filter(dog => dog !== randomAnswer)
+            }
+            return dogAnswers.sort(() => Math.random() - 0.5)
         }
-    
-        console.log("dogAnswers length is", dogAnswers.length)
-
-        return dogAnswers.sort(() => Math.random() - 0.5)
-
     }
     
-
     render() {
-      console.log("this.props is", this.props.dogsList)
-      //console.log("random dogs is:", this.createRandomAnswers() )
-    return <Game1Visualiser imgUrl={this.props.url} breed={this.props.breed} dogAnswers = {this.createRandomAnswers()}/>
+        // return <h1>test</h1>
+    return <Game1Visualiser 
+    url={this.props.url} breed={this.props.breed} 
+    dogAnswers = {this.createRandomAnswers()}
+    startGame = {this.startGame}
+    />
   }
 }
 
 const mapStateToProps = (state) => {
-    console.log('STATE GAME1', state)
+    console.log('game1state', state)
     return {
-        dogsList: state.mainpage,
-        url: state.game1.url,
-        breed: state.game1.breed
+        dogsList: state.dogsList,
+        breed: state.breedAndUrl.breed,
+        url: state.breedAndUrl.url
     }
   }
 
-export default connect(mapStateToProps)(Game1Container)
+export default connect(mapStateToProps, { getDogs, getBreedAndUrl })(Game1Container)

@@ -1,27 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import request from 'superagent'
+import { getDogs } from '../actions/getDogs'
 
 class Main extends Component {
-    setStoreWithDogs = (breeds) => {
-        this.props.dispatch({
-            type: 'INITIALISE_STORE',
-            payload: {
-                dogsList: breeds
-            }
-        })
-    }
 
-    componentDidMount() {
-        request
-            .get('https://dog.ceo/api/breeds/list/all')
-            .then(response => {
-            const breeds = Object.keys(response.body.message)
-            this.setStoreWithDogs(breeds)
-            })
-            .catch(console.error)
-        }
+  componentDidMount() {
+    this.props.getDogs()
+  }
 
   render() {
     const urlDogImage = "https://s.abcnews.com/images/US/160825_vod_orig_historyofdogs_16x9_992.jpg"
@@ -42,9 +28,10 @@ class Main extends Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log('mainpagestate', state)
     return {
-      state
+      dogsList: state
     }
   }
 
-export default connect(mapStateToProps)(Main)
+export default connect(mapStateToProps, { getDogs })(Main)
