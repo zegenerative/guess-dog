@@ -13,7 +13,7 @@ export default class Game1Visualiser extends Component {
     return (
       <div>
         <h1>GAME 1</h1>
-        <button onClick={this.props.startGame}><h2>START GAME</h2></button>
+        <button onClick={this.props.startGame}><h2>NEW QUESTION</h2></button>
         <p>look! this is a {this.props.breed}</p>
           <img src={this.props.url} alt='dog'></img>
           <br />

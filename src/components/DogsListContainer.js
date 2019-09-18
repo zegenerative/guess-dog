@@ -1,19 +1,26 @@
 import React, { Component } from 'react'
 import DogsList from './DogsList'
 import { connect } from 'react-redux'
+import { getDogs } from '../actions/getDogs'
 
 class DogsListContainer extends Component {
 
+  componentDidMount() {
+    this.props.getDogs()
+  }
+
   render() {
-    console.log(this.props.dogsList)
-    return <DogsList dogBreeds={this.props.dogsList} />
+    console.log('state from the dogslist', this.props.dogsList)
+    if(this.props.dogsList !== null) {
+      return <DogsList dogBreeds={this.props.dogsList} />
+    }
   }
 }
 
-const mapStateToProps = (state) => {
+  const mapStateToProps = (state) => {
     return {
       dogsList: state
     }
   }
 
-export default connect(mapStateToProps)(DogsListContainer)
+export default connect(mapStateToProps, { getDogs })(DogsListContainer)
