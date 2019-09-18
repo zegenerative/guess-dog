@@ -2,7 +2,7 @@ const reducer = (state = [], action = {}) => {
     console.log(action)
     switch (action.type) {
         case 'INITIALISE_STORE':
-            return [ ...state, ...action.payload.dogsList ]
+            return [...action.payload.dogsList ]//deleted ...state as initialising store
     default:
       return state 
     }
