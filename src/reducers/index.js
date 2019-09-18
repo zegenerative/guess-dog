@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
 import game1 from './game1'
-import mainpage from './main'
+import setDogsList from './setDogsList'
 
 export default combineReducers({
-      mainpage,
+      setDogsList,
       game1
   })

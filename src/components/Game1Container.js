@@ -2,20 +2,12 @@ import React, { Component } from 'react'
 import Game1Visualiser from './Game1Visualiser'
 import request from 'superagent'
 import { connect } from 'react-redux'
+import { getDogs } from '../actions/getDogs'
 
 class Game1Container extends Component {
 
     componentDidMount() {
-        console.log(this.props)
-        const random = Math.floor((Math.random() * this.props.dogsList.length) - 1)
-        const randomBreed = this.props.dogsList[random]
-        request
-            .get('https://dog.ceo/api/breed/' + randomBreed + '/images/random')
-            .then(response => {
-            const imgUrl = response.body.message
-            this.moveIntoTheStore(imgUrl, randomBreed)
-            })
-            .catch(console.error)
+        this.props.getDogs()
         }
     
     moveIntoTheStore = (url, breed) => {
@@ -33,18 +25,6 @@ class Game1Container extends Component {
         let dogAnswers = [this.props.breed]
         let randomAnswer = null
         let listOfWrongDogs = this.props.dogsList.filter(dog => dog !== this.props.breed)
-        /*const listOfAllDogs = this.props.dogsList
-        console.log("listOfAllDogs is", listOfAllDogs)
-        const listOfAllDogsLessCorrect = listOfAllDogs.filter(Dog => Dog !== this.props.breed)
-        console.log("listOfAllDoglessCorrect is", listOfAllDogsLessCorrect, "list of correct answer is:", this.props.breed)
-        const randomDogAnswer = listOfAllDogsLessCorrect[Math.floor(Math.random()*listOfAllDogsLessCorrect.length)]
-        
-        const listOfAllDogsLessCorrectPlusOne = listOfAllDogsLessCorrect.filter(Dog => Dog !== randomDogAnswer)
-        console.log("listOfAllDogsLessCorrectPlusone is", listOfAllDogsLessCorrectPlusOne)
-        const randomDogAnswer2 = listOfAllDogsLessCorrectPlusOne[Math.floor(Math.random()*listOfAllDogsLessCorrectPlusOne.length)]
-        console.log("randomDogAnswer2 is ", randomDogAnswer2)
-        dogAnswers = dogAnswers.concat(randomDogAnswer, randomDogAnswer2, this.props.breed)*/
-        
     
         while(dogAnswers.length < 3){
 
@@ -60,7 +40,6 @@ class Game1Container extends Component {
 
     }
     
-
     render() {
       console.log("this.props is", this.props.dogsList)
       //console.log("random dogs is:", this.createRandomAnswers() )
@@ -77,4 +56,4 @@ const mapStateToProps = (state) => {
     }
   }
 
-export default connect(mapStateToProps)(Game1Container)
+export default connect(mapStateToProps, { getDogs })(Game1Container)
