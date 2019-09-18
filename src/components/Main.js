@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import request from 'superagent'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { getDogs } from '../actions/game1Action';
+import PropTypes from 'prop-types';
 
 class Main extends Component {
     setStoreWithDogs = (breeds) => {
@@ -14,13 +15,7 @@ class Main extends Component {
     }
 
     componentDidMount() {
-        request
-            .get('https://dog.ceo/api/breeds/list/all')
-            .then(response => {
-            const breeds = Object.keys(response.body.message)
-            this.setStoreWithDogs(breeds)
-            })
-            .catch(console.error)
+      this.props.getDogs();
         }
 
   render() {
@@ -41,10 +36,14 @@ class Main extends Component {
   }
 }
 
+Main.propTypes = {
+  getDogs: PropTypes.func.isRequired,
+  
+};
 const mapStateToProps = (state) => {
     return {
       state
     }
   }
 
-export default connect(mapStateToProps)(Main)
+  export default connect(mapStateToProps, { getDogs })(Main)
