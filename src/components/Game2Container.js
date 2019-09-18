@@ -61,11 +61,6 @@ class Game2Container extends Component {
         const secondIndex = chosenDog.indexOf("/", firstIndex+5)
         const dogNameDisplay = chosenDog.slice(firstIndex+5, secondIndex)
 
-        //this.state.correctDogName = dogNameDisplay
-        //this.setState({correctDogName: dogNameDisplay})
-    
-        //console.log("dogNameDisplay", this.correctDogName)
-
         return dogNameDisplay
     }
 
@@ -78,8 +73,8 @@ class Game2Container extends Component {
         console.log("you selected the correct dog?", selectedAnsweris)
         if(selectedAnsweris == true){
 
-            this.state.score +=1
-            this.state.questionNumber+=1
+            this.setState({score: this.score+1})
+            this.setState({questionNumber: this.questionNumber+1})
             alert("Your score is ", this.state.score)
         }
         alert(selectedAnsweris)
