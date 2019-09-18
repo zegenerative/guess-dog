@@ -72,7 +72,17 @@ class Game2Container extends Component {
     dogClick = (event, dogName)=>{
 
         event.preventDefault()
-        console.log("you clicked", event.target.src)
+        const dogGuessed = event.target.src
+        console.log("you clicked", dogGuessed)
+        let selectedAnsweris = dogGuessed.includes(this.state.correctDogName)
+        console.log("you selected the correct dog?", selectedAnsweris)
+        if(selectedAnsweris == true){
+
+            this.state.score +=1
+            this.state.questionNumber+=1
+            alert("Your score is ", this.state.score)
+        }
+        alert(selectedAnsweris)
         //console.log("the correct answer is ", this.state.corretDogName)
     }
 
