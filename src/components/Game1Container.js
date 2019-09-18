@@ -3,7 +3,6 @@ import Game1Visualiser from './Game1Visualiser'
 import { connect } from 'react-redux'
 import { getDogs } from '../actions/getDogs'
 import { getBreedAndUrl } from '../actions/getBreedAndUrl'
-import { thisExpression } from '@babel/types'
 
 class Game1Container extends Component {
     componentDidMount() {
@@ -34,7 +33,7 @@ class Game1Container extends Component {
     render() {
         // return <h1>test</h1>
     return <Game1Visualiser 
-    // imgUrl={this.props.url} breed={this.props.breed} 
+    url={this.props.url} breed={this.props.breed} 
     dogAnswers = {this.createRandomAnswers()}
     startGame = {this.startGame}
     />
@@ -46,7 +45,7 @@ const mapStateToProps = (state) => {
     return {
         dogsList: state.dogsList,
         breed: state.breedAndUrl.breed,
-        url: state.breedAndUrl.imgUrl
+        url: state.breedAndUrl.url
     }
   }
 
