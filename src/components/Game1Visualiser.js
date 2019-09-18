@@ -10,15 +10,16 @@ export default class Game1Visualiser extends Component {
   }*/
   
   render() {
-    console.log("this.props.dogAnswers is", this.props.dogAnswers)
     return (
-      
       <div>
-        <h1> do not refresh!!!</h1>
+        <h1>GAME 1</h1>
+        <button onClick={this.props.startGame}><h2>START GAME</h2></button>
         <p>look! this is a {this.props.breed}</p>
           <img src={this.props.imgUrl} alt='dog'></img>
           <br />
-          {this.props.dogAnswers.map(dog =><button> {dog}</button>)}
+          {!this.props.dogAnswers && 'loading...'}
+          {this.props.dogAnswers && this.props.dogAnswers.map(dog =>
+          <button key={dog}>{dog}</button>)}
       </div>
     )
   }

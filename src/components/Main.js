@@ -28,8 +28,9 @@ class Main extends Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log('mainpagestate', state)
     return {
-      state
+      dogsList: state
     }
   }
 

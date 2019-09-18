@@ -5,14 +5,14 @@ import { connect } from 'react-redux'
 class DogsListContainer extends Component {
 
   render() {
-    console.log(this.props.dogs)
-    return <DogsList dogBreeds={this.props.dogs.dogsList} />
+    console.log(this.props.dogsList)
+    return <DogsList dogBreeds={this.props.dogsList} />
   }
 }
 
 const mapStateToProps = (state) => {
     return {
-      dogs: state
+      dogsList: state
     }
   }
 

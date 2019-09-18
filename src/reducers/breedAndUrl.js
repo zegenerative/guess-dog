@@ -1,8 +1,9 @@
 const reducer = (state = {}, action = {}) => {
+  console.log('this is the breedandurl', action.payload)
     switch (action.type) {
-        case 'ADD_URL_RANDOMBREED':
+        case 'GET_BREED_AND_URL':
             console.log()
-            return {...state, ...action.payload}
+            return { ...action.payload }
     default:
       return state 
     }
