@@ -1,0 +1,3 @@
+export const GET_RANDOM_BREED = 'GET_RANDOM_BREED';
+export const SET_DOGS_LIST = 'SET_DOGS_LIST';
+export const SET_RANDOM_IMAGE_URL = 'SET_RANDOM_IMAGE_URL';

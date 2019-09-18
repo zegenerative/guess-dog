@@ -22,8 +22,7 @@ export default class DogBreedImagesContainer extends Component {
   }
 
   render() {
-
-    console.log("What is 'this.props", this.props)
+    
     return <DogBreedImages breed = {this.props.match.params.breed} images={ this.state.images } />
   }
 }

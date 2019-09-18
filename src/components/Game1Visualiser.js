@@ -15,7 +15,12 @@ export default class Game1Visualiser extends Component {
         <h1> do not refresh!!!</h1>
         <p>look! this is a {this.props.breed}</p>
           <img src={this.props.imgUrl} alt='dog'></img>
+          <button>The answer is {this.props.breed}</button>
+          <button> Answer1</button>
+           <button> Answer2</button>
+          
       </div>
     )
   }
 }
+
