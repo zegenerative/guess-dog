@@ -2,11 +2,8 @@ import React, { Component } from 'react'
 
 
 export default class Game2Visualiser extends Component {
-  
   render() {
- 
     return (
-      
       <div>
         <h1>Game 2!!!!!!</h1>
         <h2>Question Number: {this.props.questionNumber}</h2>
