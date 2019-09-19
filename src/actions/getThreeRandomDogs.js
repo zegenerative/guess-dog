@@ -12,21 +12,27 @@ export const getThreeRandomDogs = () => {
         // if(dogsList !== null) { 
         //     return 
         // } else {
-        return request
-            .get('https://dog.ceo/api/breeds/image/random/3')
-            .then(response =>{
-                console.log("response in three random dogs is", response.body.message)
-               dispatch({
-                    type: 'GET_THREE_DOGS',
-                    payload: {
-                        threeDogs: response.body.message
-                    }
-                    //console.log("respons.body G2C is", response.body)
-                    //this.updateImgURLsInLocalState(imgURLs)
+
+        const threeDogs = getState().threeDogs
+        console.log("threeDogs in getThreeRandomDogs is", threeDogs)
+        //if(threeDogs !== null) return
+
+
+            return request
+                .get('https://dog.ceo/api/breeds/image/random/3')
+                .then(response =>{
+                    console.log("response in three random dogs is", response.body.message)
+                dispatch({
+                        type: 'GET_THREE_DOGS',
+                        payload: {
+                            threeDogs: response.body.message
+                        }
+                        //console.log("respons.body G2C is", response.body)
+                        //this.updateImgURLsInLocalState(imgURLs)
+                    })
                 })
-            })
-            .catch(console.error)
-        }
+                .catch(console.error)
+            }
 }
 
 export const getCorrectDogName = (name)=>{
