@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Game2Visualiser from './Game2Visualiser'
 import request from 'superagent'
 import { connect } from 'react-redux'
-import {getThreeRandomDogs, getCorrectDogName, updateQuestionNo} from '../actions/getThreeRandomDogs'
+import {getThreeRandomDogs, getCorrectDogName, updateQuestionNo,updateScore, updateCorrectDogURL} from '../actions/getThreeRandomDogs'
 
 //const redux = require('redux')
 
@@ -32,6 +32,8 @@ class Game2Container extends Component {
         // display one name under three dog images
             console.log("getDogName imgUrls", imgURLs)
             const chosenDog = imgURLs[Math.floor(Math.random()*imgURLs.length)]
+            this.props.updateCorrectDogURL(chosenDog) //send correct dog URL to redux store
+
             const firstIndex = chosenDog.indexOf("eeds")
             const secondIndex = chosenDog.indexOf("/", firstIndex+5)
             const dogNameDisplay = chosenDog.slice(firstIndex+5, secondIndex)
@@ -50,19 +52,23 @@ class Game2Container extends Component {
         
          let selectedAnsweris = dogGuessed.includes(this.props.correctDogName)
          this.setState({questionNumber: this.questionNumber+1})
-        this.props.updateQuestionNo()
+         this.props.updateQuestionNo()
          
          if(selectedAnsweris === true){
             alert("You guessed correctly")
             console.log("you gueesed", dogGuessed, this.props.correctDogName)
-            
+            this.props.updateScore()
+
          }else{
 
             alert("Wrong dog")
+            setTimeout(this.props.getThreeRandomDogs,2000)
+            return
 
          }
 
          this.props.getThreeRandomDogs() //get three new random image URLs
+         
 
      }
 
@@ -74,7 +80,8 @@ class Game2Container extends Component {
         // correctDogName = {this.state.correctDogName} 
         dogClick = {this.dogClick}
         startGame = {this.startGame}
-        questionNumber = {this.props.questionNumber} />
+        questionNumber = {this.props.questionNumber}
+        score ={this.props.score} />
     }   
 }
 
@@ -85,14 +92,18 @@ const mapStateToProps = (state) => {
         dogsList: state.dogsList,
         threeDogs: state.game.threeDogs, //three image URLs
         correctDogName: state.game.correctDogName,  //dog name displayed under images
-        questionNumber: state.game.questionNumber
+        questionNumber: state.game.questionNumber,
+        score: state.game.score,
+        dogURL: state.game.dogURL
     }
   }
 
 const mapDispatchToProps = {
     getThreeRandomDogs,
     getCorrectDogName,
-    updateQuestionNo
+    updateQuestionNo,
+    updateScore,
+    updateCorrectDogURL
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game2Container)

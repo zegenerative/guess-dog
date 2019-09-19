@@ -88,4 +88,19 @@ export const updateQuestionNo = () => {
 }
 
 
+export const updateScore = () => {
+    return {
+        type: 'UPDATE_SCORE'
+    }
+}
+
+//send correct dog URL image to the store
+export const updateCorrectDogURL = (dogURL) =>{
+
+    return{
+
+        type: 'UPDATE_CORRECT_DOG_URL',
+        payload: dogURL
+    }
+}
 

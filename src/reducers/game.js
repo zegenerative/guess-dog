@@ -2,7 +2,8 @@ const initial = {
   threeDogs: [],
   correctDogName: '',
   score: 0,
-  questionNumber: 1
+  questionNumber: 1,
+  dogURL: ''
 }
 
 const reducer = (state = initial, action = {}) => {
@@ -19,6 +20,13 @@ const reducer = (state = initial, action = {}) => {
         case 'UPDATE_QUESTION_NO':
             console.log("UPDATE_QUESTION_NO")
             return {...state, questionNumber: state.questionNumber + 1 }
+        case 'UPDATE_SCORE':
+            console.log("UPDATE_SCORE")
+            return {...state, score: state.score + 1 }
+        case 'UPDATE_CORRECT_DOG_URL':
+            return {...state, dogURL: state.dogURL }
+            
+
     default:
       return state 
     }
