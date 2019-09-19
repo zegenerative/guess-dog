@@ -18,7 +18,7 @@ class Main extends Component {
           <p>Click me to list dogs available</p>
           <div>
               <Link to="/Game1"><button>Game 1</button></Link>
-              <button>Game 2</button>
+              <Link to="/Game2"><button>Game 2</button></Link>
               <button>Game 3</button>
               <Link to='/Credits'><footer>credits</footer></Link>
           </div>
