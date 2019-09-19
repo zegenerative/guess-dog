@@ -3,7 +3,7 @@ import Game1Visualiser from './Game1Visualiser'
 import { connect } from 'react-redux'
 import { getDogs } from '../actions/getDogs'
 import { getBreedAndUrl } from '../actions/getBreedAndUrl'
-import { updateScore } from '../actions/updateScore'
+import { updateQuestionNo, updateScore } from '../actions/getThreeRandomDogs'
 
 class Game1Container extends Component {
     state = {
@@ -15,7 +15,7 @@ class Game1Container extends Component {
     }
 
     nextQuestion = () => {
-        console.log('start game', this.state)
+        this.props.updateQuestionNo() 
             this.setState({
             display: true
             })
@@ -38,14 +38,11 @@ class Game1Container extends Component {
     }
 
     checkAnswer = (event) => {
+        event.preventDefault()
         const answer = event.target.innerHTML
         if(answer === this.props.breed) { 
             alert('Correct!')
-            this.props.updateScore(1, 1)
-            setTimeout(this.nextQuestion, 2000)
-        } else {
-            alert('Wrong!')
-            this.props.updateScore(1, 0)
+            this.props.updateScore()
             setTimeout(this.nextQuestion, 2000)
         }
     }
@@ -53,7 +50,7 @@ class Game1Container extends Component {
     render() {
         return (
         <Game1Visualiser 
-            questionNo={this.props.total}
+            questionNumber={this.props.questionNumber}
             score={this.props.score}
             url={this.props.url} breed={this.props.breed} 
             dogAnswers = {this.createRandomAnswers()}
@@ -70,9 +67,9 @@ const mapStateToProps = (state) => {
         dogsList: state.dogsList,
         breed: state.breedAndUrl.breed,
         url: state.breedAndUrl.url,
-        score: state.score.score,
-        total: state.score.total
+        questionNumber: state.game.questionNumber,
+        score: state.game.score
     }
 }
 
-export default connect(mapStateToProps, { getDogs, getBreedAndUrl, updateScore })(Game1Container)
+export default connect(mapStateToProps, { getDogs, getBreedAndUrl, updateQuestionNo, updateScore })(Game1Container)
