@@ -44,8 +44,9 @@ class Game1Container extends Component {
 
     checkAnswer = (event) => {
         event.preventDefault()
-        const answer = event.target.innerHTML
-        if(answer === this.props.breed) { 
+        const answer = event.target.textContent
+        if(answer === this.props.breed) {
+            console.log('correct answer given') 
             this.props.updateScore()
             this.setState({
                 answer: 'correct'
@@ -56,6 +57,7 @@ class Game1Container extends Component {
                 this.props.endGame()
             }
         } else {
+            console.log('wrong answer given') 
             this.setState({
                 answer: 'incorrect'
             })
@@ -80,6 +82,7 @@ class Game1Container extends Component {
                     nextQuestion = {this.nextQuestion}
                     checkAnswer = {this.checkAnswer}
                     display = {this.state.display}
+                    remainingQuestions = {10 - this.props.questionNumber}
                     answer = {this.state.answer}/> 
                 : <GameEnds
                     score={this.props.score}
@@ -90,7 +93,6 @@ class Game1Container extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log('game1state', state)
     return {
         dogsList: state.dogsList,
         breed: state.breedAndUrl.breed,
