@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 
 export default class Game2Visualiser extends Component {
   render() {
     return (
-      this.props.showCorrectAnswer ? this.props.showCorrect() : <div>
+
+      this.props.showCorrectAnswer ? this.props.showCorrect() :
+      
+      <div><Link to='/'><button><h6>back to main</h6></button></Link>
         <h1>Game 2!!!!!!</h1>
         <h2>Question Number: {this.props.questionNumber}</h2>
         <h2>Score: {this.props.score}</h2>
