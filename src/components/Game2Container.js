@@ -5,56 +5,82 @@ import { getThreeRandomDogs, getCorrectDogName, updateQuestionNo,updateScore, up
 
 class Game2Container extends Component {
 
+    state = {
+        showCorrectAnswer: false, 
+    }
     componentDidMount() {
         //get three random dog image URLs
         this.props.getThreeRandomDogs()
     }
 
     getDogName = (imgURLs) => {
-        if(this.props.threeDogs !== null){
+        if (this.props.threeDogs !== null) {
             console.log('props of game2', this.props.threeDogs)
-        // display one name under three dog images
+            // display one name under three dog images
             console.log("getDogName imgUrls", imgURLs)
-            const chosenDog = imgURLs[Math.floor(Math.random()*imgURLs.length)]
+            const chosenDog = imgURLs[Math.floor(Math.random() * imgURLs.length)]
             this.props.updateCorrectDogURL(chosenDog) //send correct dog URL to redux store
             const firstIndex = chosenDog.indexOf("eeds")
-            const secondIndex = chosenDog.indexOf("/", firstIndex+5)
-            const dogNameDisplay = chosenDog.slice(firstIndex+5, secondIndex)
+            const secondIndex = chosenDog.indexOf("/", firstIndex + 5)
+            const dogNameDisplay = chosenDog.slice(firstIndex + 5, secondIndex)
             console.log('dogNameDisplay', dogNameDisplay)
             this.props.getCorrectDogName(dogNameDisplay)
             return dogNameDisplay
         }
     }
 
-    dogClick = (event, dogName)=>{
+    dogClick = (event, dogName) => {
         event.preventDefault()
         const dogGuessed = event.target.src
         let selectedAnsweris = dogGuessed.includes(this.props.correctDogName)
-        this.setState({questionNumber: this.questionNumber+1})
+        this.setState({ questionNumber: this.questionNumber + 1 })
         this.props.updateQuestionNo()
-        if(selectedAnsweris === true){
-        alert("You guessed correctly")
-        console.log("you gueesed", dogGuessed, this.props.correctDogName)
-        this.props.updateScore()
+        if (selectedAnsweris === true) {
+            alert("You guessed correctly")
+            console.log("you guessed", dogGuessed, this.props.correctDogName)
+            this.props.updateScore()
         } else {
-        alert("Wrong dog")
-        setTimeout(this.props.getThreeRandomDogs,2000)
-        return
+            alert("wrong answer");
+            this.setState({
+                showCorrectAnswer: true
+            })
+
+            setTimeout(() => {
+                this.props.getThreeRandomDogs()
+                this.setState({ showCorrectAnswer: false });
+            }, 3000)
+            return
         }
         this.props.getThreeRandomDogs() //get three new random image URLs
-     }
+    }
+    showCorrect = () => {
+        console.log('hello')
+        const answer = this.props.threeDogs.filter(url => url.includes(this.props.correctDogName))
+        if (answer.length > 0) {
+            return <div>
+                    <p>The correct answer was </p>
+                <img src={answer[0]} alt="" width="100px" />
+                </div>
+        }
+      
+    }
 
+          
     render() {
-        console.log('Game2Container this.props test:', this.props)
-        return <Game2Visualiser 
-        imgUrls={this.props.threeDogs} 
-        correctDogName = {this.props.correctDogName}
-        dogClick = {this.dogClick}
-        startGame = {this.startGame}
-        questionNumber = {this.props.questionNumber}
-        score ={this.props.score} />
-    }   
+
+        return <Game2Visualiser
+            imgUrls={this.props.threeDogs}
+            correctDogName={this.props.correctDogName}
+            dogClick={this.dogClick}
+            startGame={this.startGame}
+            questionNumber={this.props.questionNumber}
+            score={this.props.score}
+            showCorrectAnswer={this.state.showCorrectAnswer}
+            showCorrect={this.showCorrect}
+        />
+    }
 }
+
 
 const mapStateToProps = (state) => {
     return {
