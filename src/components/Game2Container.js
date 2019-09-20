@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Game2Visualiser from './Game2Visualiser'
 import { connect } from 'react-redux'
+import { endGame } from '../actions/endGame' 
 import { getThreeRandomDogs, getCorrectDogName, updateQuestionNo,updateScore, updateCorrectDogURL } from '../actions/getThreeRandomDogs'
 
 class Game2Container extends Component {
@@ -53,7 +54,6 @@ class Game2Container extends Component {
         }
         this.props.getThreeRandomDogs() //get three new random image URLs
     }
-
     showCorrect = () => {
         console.log('hello')
         const answer = this.props.threeDogs.filter(url => url.includes(this.props.correctDogName))
@@ -89,7 +89,7 @@ const mapStateToProps = (state) => {
         threeDogs: state.game.threeDogs, //three image URLs
         correctDogName: state.game.correctDogName,  //dog name displayed under images
         questionNumber: state.game.questionNumber,
-        score: state.game.score,
+        score: Math.floor((state.game.score / state.game.questionNumber) * 100)+'%',
         dogURL: state.game.dogURL
     }
   }
