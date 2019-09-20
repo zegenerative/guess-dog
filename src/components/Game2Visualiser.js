@@ -8,7 +8,7 @@ export default class Game2Visualiser extends Component {
         <h1>Game 2!!!!!!</h1>
         <h2>Question Number: {this.props.questionNumber}</h2>
         <h2>Score: {this.props.score}</h2>
-        <button onClick={this.props.startGame}>Start Game 2</button>
+      
 
         <div>
           {this.props.imgUrls &&

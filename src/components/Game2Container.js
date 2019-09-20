@@ -59,7 +59,7 @@ class Game2Container extends Component {
         if (answer.length > 0) {
             return <div>
                     <p>The correct answer was </p>
-                <img src={answer[0]} alt="" width="100px" />
+                <img src={answer[0]} alt="" width="40%" />
                 </div>
         }
       
@@ -88,7 +88,7 @@ const mapStateToProps = (state) => {
         threeDogs: state.game.threeDogs, //three image URLs
         correctDogName: state.game.correctDogName,  //dog name displayed under images
         questionNumber: state.game.questionNumber,
-        score: state.game.score,
+        score: Math.floor((state.game.score / state.game.questionNumber) * 100),
         dogURL: state.game.dogURL
     }
   }

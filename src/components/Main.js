@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getDogs } from '../actions/getDogs'
 
+
 class Main extends Component {
 
   componentDidMount() {
@@ -13,9 +14,8 @@ class Main extends Component {
     const urlDogImage = "https://s.abcnews.com/images/US/160825_vod_orig_historyofdogs_16x9_992.jpg"
     return (
       <div>
-          <h1>Main Page</h1>
-          <Link to="/dogs"><img src ={urlDogImage} width = "200px"  alt = "dog"/></Link>
-          <p>Click me to list dogs available</p>
+          <h1>WOOF-WOOF </h1>
+          <Link to="/dogs"><img src ={urlDogImage} width = "50%"  alt = "dog"/></Link>
           <div>
               <Link to="/Game1"><button>Game 1</button></Link>
               <Link to="/Game2"><button>Game 2</button></Link>

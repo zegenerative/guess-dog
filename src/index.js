@@ -5,6 +5,9 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import store from './store'
+import 'materialize-css'; // It installs the JS asset only
+import 'materialize-css/dist/css/materialize.min.css';
+
 
 ReactDOM.render(
 	<Provider store={store}>
