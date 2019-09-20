@@ -17,11 +17,12 @@ export default class Game1Visualiser extends Component {
             { this.props.answer === 'start' ? <p>What kind of breed is this?</p> : <p></p> }
             { this.props.answer === 'correct' ? <h3>You are correct! it is a {this.props.breed}! </h3> : <p></p> } 
             { this.props.answer === 'incorrect' ? <h3>Oops, wrong answer... it is a {this.props.breed}! </h3> : <p></p> }   
+            {this.props.dogAnswers && this.props.dogAnswers.map(dog =>
+            <button key={dog} onClick={this.props.checkAnswer}>{dog}</button>)}
+            <br />
             <img src={this.props.url} alt='dog'></img>
             <br />
             {!this.props.dogAnswers && 'loading...'}
-            {this.props.dogAnswers && this.props.dogAnswers.map(dog =>
-            <button key={dog} onClick={this.props.checkAnswer}>{dog}</button>)}
           </div>
           }
         </div>

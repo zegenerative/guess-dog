@@ -15,12 +15,12 @@ class Main extends Component {
       <div>
           <h1>Main Page</h1>
           <Link to="/dogs"><img src ={urlDogImage} width = "200px"  alt = "dog"/></Link>
-          <p>Click me to list dogs available</p>
+          <p>Click the image to learn about the range of dog breeds</p>
           <div>
               <Link to="/Game1"><button>Game 1</button></Link>
               <Link to="/Game2"><button>Game 2</button></Link>
               <button>Game 3</button>
-              <Link to='/Credits'><footer>credits</footer></Link>
+              <Link to='/Credits'><footer><button>credits</button></footer></Link>
           </div>
       </div>
     )
