@@ -12,9 +12,9 @@ export default class Game1Visualiser extends Component {
         <Link to='/'><button class={ buttonStyle1 }><h6>back to main</h6></button></Link>
         { !this.props.display ? <h3>GAME 1</h3> : <h3>GOOD LUCK!</h3> }
         <div>
-          { this.props.display && <h6>Score: {this.props.score}</h6> }
+          { this.props.display && <h5>Score: {this.props.score}</h5> }
           { !this.props.display && <button class={buttonStyle3} onClick={this.props.nextQuestion}>START</button> }
-          { this.props.display && <h6>Question {this.props.questionNumber}</h6> }
+          { this.props.display && <div><h6>Question {this.props.questionNumber}</h6><h6>Remaining: {this.props.remainingQuestions}</h6></div> }
           { this.props.display && 
           <div class="card-panel teal lighten-2">
             { this.props.answer === 'start' ? <p>What kind of breed is this?</p> : <p></p> }

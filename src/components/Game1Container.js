@@ -82,6 +82,7 @@ class Game1Container extends Component {
                     nextQuestion = {this.nextQuestion}
                     checkAnswer = {this.checkAnswer}
                     display = {this.state.display}
+                    remainingQuestions = {10 - this.props.questionNumber}
                     answer = {this.state.answer}/> 
                 : <GameEnds
                     score={this.props.score}
