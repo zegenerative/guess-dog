@@ -2,7 +2,7 @@ const initial = {
 threeDogs: [],
 correctDogName: '',
 score: 0,
-questionNumber: 1,
+questionNumber: 0,
 dogURL: ''
 }
 

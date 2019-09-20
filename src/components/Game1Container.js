@@ -7,7 +7,9 @@ import { updateQuestionNo, updateScore } from '../actions/getThreeRandomDogs'
 
 class Game1Container extends Component {
     state = {
-        display: false
+        display: false,
+        answer: 'start'
+
     }
 
     componentDidMount() {
@@ -17,7 +19,8 @@ class Game1Container extends Component {
     nextQuestion = () => {
         this.props.updateQuestionNo() 
             this.setState({
-            display: true
+            display: true,
+            answer: 'start'
             })
         return this.props.getBreedAndUrl()
     }
@@ -41,8 +44,15 @@ class Game1Container extends Component {
         event.preventDefault()
         const answer = event.target.innerHTML
         if(answer === this.props.breed) { 
-            alert('Correct!')
             this.props.updateScore()
+            this.setState({
+                answer: 'correct'
+            })
+            setTimeout(this.nextQuestion, 2000)
+        } else {
+            this.setState({
+                answer: 'incorrect'
+            })
             setTimeout(this.nextQuestion, 2000)
         }
     }
@@ -52,11 +62,13 @@ class Game1Container extends Component {
         <Game1Visualiser 
             questionNumber={this.props.questionNumber}
             score={this.props.score}
-            url={this.props.url} breed={this.props.breed} 
+            url={this.props.url} 
+            breed={this.props.breed} 
             dogAnswers = {this.createRandomAnswers()}
             nextQuestion = {this.nextQuestion}
             checkAnswer = {this.checkAnswer}
             display = {this.state.display}
+            answer = {this.state.answer}
         />)
     }
 }
@@ -68,7 +80,7 @@ const mapStateToProps = (state) => {
         breed: state.breedAndUrl.breed,
         url: state.breedAndUrl.url,
         questionNumber: state.game.questionNumber,
-        score: state.game.score
+        score: state.game.score / state.game.questionNumber
     }
 }
 
