@@ -98,7 +98,7 @@ const mapStateToProps = (state) => {
         breed: state.breedAndUrl.breed,
         url: state.breedAndUrl.url,
         questionNumber: state.game.questionNumber,
-        score: Math.floor((state.game.score / state.game.questionNumber) * 100),
+        score: Math.floor((state.game.score / state.game.questionNumber) * 100)+'%',
         end: state.game.gameEnds
     }
 }

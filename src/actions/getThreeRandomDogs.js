@@ -64,3 +64,12 @@ export const updateCorrectDogURL = (dogURL) =>{
     }
 }
 
+export const toggleGame = (toggle) => {
+
+    return {
+        type: 'SWITCH_GAME',
+        payload: toggle
+
+    }
+}
+
