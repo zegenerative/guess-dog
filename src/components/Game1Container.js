@@ -18,6 +18,7 @@ class Game1Container extends Component {
     }
 
     nextQuestion = () => {
+        console.log(this.props.score)
         this.props.updateQuestionNo() 
             this.setState({
             display: true,
@@ -69,16 +70,20 @@ class Game1Container extends Component {
     render() {
         return (
         <div>
-        { !this.props.end ? <Game1Visualiser 
-                questionNumber={this.props.questionNumber}
-                score={this.props.score}
-                url={this.props.url} 
-                breed={this.props.breed} 
-                dogAnswers = {this.createRandomAnswers()}
-                nextQuestion = {this.nextQuestion}
-                checkAnswer = {this.checkAnswer}
-                display = {this.state.display}
-                answer = {this.state.answer}/> : <GameEnds />
+        { !this.props.end ? 
+                <Game1Visualiser 
+                    questionNumber={this.props.questionNumber}
+                    score={this.props.score}
+                    url={this.props.url} 
+                    breed={this.props.breed} 
+                    dogAnswers = {this.createRandomAnswers()}
+                    nextQuestion = {this.nextQuestion}
+                    checkAnswer = {this.checkAnswer}
+                    display = {this.state.display}
+                    answer = {this.state.answer}/> 
+                : <GameEnds
+                    score={this.props.score}
+                />
         } </div> 
         ) 
     }
@@ -91,8 +96,7 @@ const mapStateToProps = (state) => {
         breed: state.breedAndUrl.breed,
         url: state.breedAndUrl.url,
         questionNumber: state.game.questionNumber,
-        // score: Math.floor(state.game.score / state.game.questionNumber) * 10
-        score: state.game.score,
+        score: Math.floor((state.game.score / state.game.questionNumber) * 100),
         end: state.game.gameEnds
     }
 }
