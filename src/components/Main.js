@@ -21,7 +21,7 @@ class Main extends Component {
           <div>
               <Link to="/Game1"><button>Game 1</button></Link>
               <Link to="/Game2"><button>Game 2</button></Link>
-              <button>Game 3</button>
+              <Link to="/Game3"><button>Game 3</button></Link>
               <Link to='/Credits'><footer><button>credits</button></footer></Link>
           </div>
       </div>
