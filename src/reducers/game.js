@@ -24,7 +24,8 @@ const reducer = (state = initial, action = {}) => {
             console.log("UPDATE_SCORE")
             return {...state, score: state.score + 1 }
         case 'UPDATE_CORRECT_DOG_URL':
-            return {...state, dogURL: state.dogURL }
+            console.log("reducer updating with UPDATE_CORRECT_DOG_URL")
+            return {...state, dogURL: action.payload }
         default:
         return state 
     }
