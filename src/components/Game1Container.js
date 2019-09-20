@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
 import Game1Visualiser from './Game1Visualiser'
+import GameEnds from './GameEnds'
 import { connect } from 'react-redux'
 import { getDogs } from '../actions/getDogs'
 import { getBreedAndUrl } from '../actions/getBreedAndUrl'
 import { updateQuestionNo, updateScore } from '../actions/getThreeRandomDogs'
+import { endGame } from '../actions/endGame' 
 
 class Game1Container extends Component {
     state = {
         display: false,
         answer: 'start'
-
     }
 
     componentDidMount() {
@@ -48,28 +49,38 @@ class Game1Container extends Component {
             this.setState({
                 answer: 'correct'
             })
-            setTimeout(this.nextQuestion, 2000)
+            if(this.props.questionNumber < 10) {
+                setTimeout(this.nextQuestion, 2000)
+            } else {
+                this.props.endGame()
+            }
         } else {
             this.setState({
                 answer: 'incorrect'
             })
-            setTimeout(this.nextQuestion, 2000)
+            if(this.props.questionNumber < 10) {
+                setTimeout(this.nextQuestion, 2000)
+            } else {
+                this.props.endGame()
+            }
         }
     }
     
     render() {
         return (
-        <Game1Visualiser 
-            questionNumber={this.props.questionNumber}
-            score={this.props.score}
-            url={this.props.url} 
-            breed={this.props.breed} 
-            dogAnswers = {this.createRandomAnswers()}
-            nextQuestion = {this.nextQuestion}
-            checkAnswer = {this.checkAnswer}
-            display = {this.state.display}
-            answer = {this.state.answer}
-        />)
+        <div>
+        { !this.props.end ? <Game1Visualiser 
+                questionNumber={this.props.questionNumber}
+                score={this.props.score}
+                url={this.props.url} 
+                breed={this.props.breed} 
+                dogAnswers = {this.createRandomAnswers()}
+                nextQuestion = {this.nextQuestion}
+                checkAnswer = {this.checkAnswer}
+                display = {this.state.display}
+                answer = {this.state.answer}/> : <GameEnds />
+        } </div> 
+        ) 
     }
 }
 
@@ -80,8 +91,10 @@ const mapStateToProps = (state) => {
         breed: state.breedAndUrl.breed,
         url: state.breedAndUrl.url,
         questionNumber: state.game.questionNumber,
-        score: state.game.score / state.game.questionNumber
+        // score: Math.floor(state.game.score / state.game.questionNumber) * 10
+        score: state.game.score,
+        end: state.game.gameEnds
     }
 }
 
-export default connect(mapStateToProps, { getDogs, getBreedAndUrl, updateQuestionNo, updateScore })(Game1Container)
+export default connect(mapStateToProps, { getDogs, getBreedAndUrl, updateQuestionNo, updateScore, endGame })(Game1Container)
