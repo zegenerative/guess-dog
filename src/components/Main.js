@@ -3,6 +3,10 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getDogs } from '../actions/getDogs'
 
+const buttonStyle1 = "waves-effect waves-light btn-large"
+const buttonStyle2 = "waves-effect waves-dark btn-small"
+const buttonStyle3 = "btn-floating btn-large waves-effect waves-light red"
+
 class Main extends Component {
 
   componentDidMount() {
@@ -13,6 +17,7 @@ class Main extends Component {
     const urlDogImage = "https://s.abcnews.com/images/US/160825_vod_orig_historyofdogs_16x9_992.jpg"
     const germanFlag = "https://www.theflagshop.co.nz/media/catalog/product/cache/1/image/800x800/9df78eab33525d08d6e5fb8d27136e95/g/e/germanysmall.jpg"
     return (
+<<<<<<< HEAD
       <div>
           <h1>Main Page</h1>
           <Link to="/dogs"><img src ={urlDogImage} width = "200px"  alt = "dog"/></Link>
@@ -23,6 +28,18 @@ class Main extends Component {
               <Link to="/Game2"><button>Game 2</button></Link>
               <Link to="/Game3"><button>Game 3</button></Link>
               <Link to='/Credits'><footer><button>credits</button></footer></Link>
+=======
+      <div class="card-panel teal lighten-2">
+          <h1>THE INCREDIBLE DOG QUIZ</h1>
+          <Link to="/dogs"><img src ={urlDogImage} width = "50%"  alt = "dog"/></Link>
+          <p>Click the image to learn about the range of dog breeds</p>
+          <div>
+              <Link to="/Game1"><button class={buttonStyle2}>Game 1</button></Link>
+              <Link to="/Game2"><button class={buttonStyle2}>Game 2</button></Link>
+              <button class={buttonStyle2}>Game 3</button>
+              <br />
+              <Link to='/Credits'><footer class={buttonStyle3}>credits</footer></Link>
+>>>>>>> 6110f60d1bba1f9a4727085a52103e9f799e7846
           </div>
       </div>
     )

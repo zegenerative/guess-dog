@@ -1,26 +1,29 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
+const buttonStyle1 = "waves-effect waves-light btn-large"
+const buttonStyle2 = "waves-effect waves-dark btn-small"
+const buttonStyle3 = "btn-floating btn-large waves-effect waves-light red"
+
 export default class Game1Visualiser extends Component {
   render() {
-    console.log('questionnumber from visualiser', this.props.questionNumber)
     return (
-      <div>
-        <Link to='/'><button><h6>back to main</h6></button></Link>
-        { !this.props.display ? <h1>GAME 1</h1> : <h1>GOOD LUCK!</h1> }
+      <div class="card-panel teal lighten-2">
+        <Link to='/'><button class={ buttonStyle1 }><h6>back to main</h6></button></Link>
+        { !this.props.display ? <h3>GAME 1</h3> : <h3>GOOD LUCK!</h3> }
         <div>
-          { this.props.display && <h2>Score: {this.props.score}</h2> }
-          { !this.props.display && <button onClick={this.props.nextQuestion}><h2>START GAME</h2></button> }
-          { this.props.display && <h2>Question {this.props.questionNumber}</h2> }
+          { this.props.display && <h5>Score: {this.props.score}</h5> }
+          { !this.props.display && <button class={buttonStyle3} onClick={this.props.nextQuestion}>START</button> }
+          { this.props.display && <div><h6>Question {this.props.questionNumber}</h6><h6>Remaining: {this.props.remainingQuestions}</h6></div> }
           { this.props.display && 
-          <div>
+          <div class="card-panel teal lighten-2">
             { this.props.answer === 'start' ? <p>What kind of breed is this?</p> : <p></p> }
             { this.props.answer === 'correct' ? <h3>You are correct! it is a {this.props.breed}! </h3> : <p></p> } 
             { this.props.answer === 'incorrect' ? <h3>Oops, wrong answer... it is a {this.props.breed}! </h3> : <p></p> }   
             {this.props.dogAnswers && this.props.dogAnswers.map(dog =>
-            <button key={dog} onClick={this.props.checkAnswer}>{dog}</button>)}
+            <button class={ buttonStyle2 } key={dog} onClick={this.props.checkAnswer}>{dog}</button>)}
             <br />
-            <img src={this.props.url} alt='dog'></img>
+            <img src={this.props.url} alt='dog' width='30%'></img>
             <br />
             {!this.props.dogAnswers && 'loading...'}
           </div>

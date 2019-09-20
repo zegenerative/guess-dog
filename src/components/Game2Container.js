@@ -53,13 +53,14 @@ class Game2Container extends Component {
         }
         this.props.getThreeRandomDogs() //get three new random image URLs
     }
+
     showCorrect = () => {
         console.log('hello')
         const answer = this.props.threeDogs.filter(url => url.includes(this.props.correctDogName))
         if (answer.length > 0) {
-            return <div>
+            return <div class="card-panel teal lighten-2">
                     <p>The correct answer was </p>
-                <img src={answer[0]} alt="" width="100px" />
+                <img src={answer[0]} alt="" width="40%" />
                 </div>
         }
       
